@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Content Strategy EDA Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='netflix_logo.png') }}" type="image/png">
+    <style>
+        /* 🖼 Background and Overlay Setup */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            background: url("{{ url_for('static', filename='images/netflix_bg.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* 🔲 Dark overlay for Netflix-style dim effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.76); /* Adjust opacity for darkness */
+            z-index: -1;
+        }
+
+        /* 🏠 Page Layout */
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            color: #E50914;
+            margin-bottom: 10px;
+        }
+
+        .accent {
+            height: 4px;
+            width: 120px;
+            background: linear-gradient(90deg, #E50914, #b20710);
+            border-radius: 2px;
+            margin: 10px auto 25px;
+        }
+
+        .description {
+            color: #cccccc;
+            max-width: 950px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        /* 🎞 Plot Sections */
+        .plot-section {
+            margin: 50px auto;
+            background-color: rgba(26, 26, 26, 0.9); /* slightly transparent dark card */
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .plot-section h2 {
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .plot-section p {
+            color: #b3b3b3;
+            max-width: 450px;
+            margin: 10px auto;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .plot-section iframe {
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 1110px;
+            height: 418px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+        }
+
+        /* 🪄 Hover effect */
+        .plot-section:hover {
+            transform: scale(1.01);
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #b3b3b3;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+
+        /* 📱 Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            iframe {
+                height: 400px;
+                width: 100%;
+            }
+
+            .plot-section {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎬 Netflix Content Strategy Analysis</h1>
+        <div class="accent"></div>
+        <p class="description">
+            This project explores Netflix’s content strategy through interactive data visualizations and exploratory data analysis (EDA). 
+            It uncovers insights into global availability, viewing trends, language distribution, and content types to understand what drives audience engagement.
+        </p>
+
+        {% for plot in plots %}
+        <div class="plot-section">
+            <h2>{{ plot.title }}</h2>
+            <p>{{ plot.description }}</p>
+            <iframe src="{{ url_for('static', filename='plots/' + plot.file) }}"></iframe>
+        </div>
+        {% endfor %}
+    </div>
+
+    <footer>
+  <p>© 2025 Netflix Content Strategy Analysis | Designed by Vaibhav</p>
+</footer>
+
+</body>
+</html>
