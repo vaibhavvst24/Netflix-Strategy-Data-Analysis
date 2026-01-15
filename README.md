@@ -120,4 +120,6 @@ Netflix follows a data-driven release and distribution strategy
 ---
 
 # Flask Webpage
-![Netflix-Strategy-Data-Analysis](.png)
+![Netflix-Strategy-Data-Analysis](netflixeda.png)
+
+---
